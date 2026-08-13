@@ -67,6 +67,12 @@ Prüfen, ob neue Zeilen in `spotify_tracks` auftauchen und ob die Logs plausibel
 
 ### 5. Dauerbetrieb auf dem V-Server (systemd)
 
+Für ein komplettes Setup in einem eigenen Proxmox LXC-Container siehe
+[`deploy/PROXMOX_SETUP.md`](deploy/PROXMOX_SETUP.md) (inkl. Container
+anlegen, Node.js installieren, Deployment, systemd-Dienst).
+
+Allgemeine Schritte (gelten für jeden Linux-Server):
+
 ```bash
 sudo useradd --system --home /opt/spotify-history-sync --shell /usr/sbin/nologin spotify-sync
 sudo mkdir -p /opt/spotify-history-sync
