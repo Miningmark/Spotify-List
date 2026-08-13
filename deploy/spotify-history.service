@@ -1,0 +1,16 @@
+[Unit]
+Description=Spotify Listening History Sync
+After=network-online.target mariadb.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=spotify-sync
+WorkingDirectory=/opt/spotify-history-sync
+ExecStart=/usr/bin/node src/index.js
+Restart=on-failure
+RestartSec=30
+EnvironmentFile=/opt/spotify-history-sync/.env
+
+[Install]
+WantedBy=multi-user.target

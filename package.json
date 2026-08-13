@@ -1,0 +1,20 @@
+{
+  "name": "spotify-history-sync",
+  "version": "1.0.0",
+  "description": "Holt stündlich die zuletzt gehörten Spotify-Songs ab und speichert sie in MariaDB",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "sync-once": "node src/index.js --once",
+    "authorize": "node src/authorize.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mysql2": "^3.11.0",
+    "node-cron": "^3.0.3"
+  }
+}
