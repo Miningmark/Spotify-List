@@ -30,7 +30,7 @@ async function insertTracks(tracks) {
   const sql = `
     INSERT IGNORE INTO \`${config.db.table}\`
       (played_at, played_date, played_time, track_id, track_name, artist_name,
-       album_name, duration_ms, duration_min, track_url, album_url, popularity, explicit)
+       album_name, duration_ms, duration_min, track_url, album_url, popularity, explicit, genre)
     VALUES ?
   `;
 
@@ -48,6 +48,7 @@ async function insertTracks(tracks) {
     t.albumUrl,
     t.popularity,
     t.explicit,
+    t.genre,
   ]);
 
   const [result] = await pool.query(sql, [values]);

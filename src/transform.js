@@ -3,10 +3,14 @@ function toMysqlDatetime(isoString) {
   return isoString.replace("T", " ").replace(/\.\d+Z$/, "");
 }
 
-function mapItemToRow(item) {
+function mapItemToRow(item, artistGenresById = {}) {
   const track = item.track;
   const mysqlDatetime = toMysqlDatetime(item.played_at);
   const [playedDate, playedTime] = mysqlDatetime.split(" ");
+
+  const primaryArtistId = track.artists[0] ? track.artists[0].id : null;
+  const genres = primaryArtistId ? artistGenresById[primaryArtistId] : null;
+  const genre = genres && genres.length > 0 ? genres.join(", ") : null;
 
   return {
     playedAt: mysqlDatetime,
@@ -22,6 +26,7 @@ function mapItemToRow(item) {
     albumUrl: track.album && track.album.external_urls ? track.album.external_urls.spotify : null,
     popularity: typeof track.popularity === "number" ? track.popularity : null,
     explicit: track.explicit ? 1 : 0,
+    genre,
   };
 }
 

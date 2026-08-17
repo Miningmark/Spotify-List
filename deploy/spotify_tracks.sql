@@ -42,6 +42,7 @@ CREATE TABLE `spotify_tracks` (
   `album_url` varchar(500) DEFAULT NULL,
   `popularity` int(11) DEFAULT NULL,
   `explicit` tinyint(1) DEFAULT NULL,
+  `genre` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

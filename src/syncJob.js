@@ -1,6 +1,6 @@
 const db = require("./db");
 const logger = require("./logger");
-const { fetchRecentlyPlayedSince } = require("./spotifyClient");
+const { fetchRecentlyPlayedSince, fetchArtistGenres } = require("./spotifyClient");
 const { mapItemToRow } = require("./transform");
 
 async function runSync() {
@@ -21,7 +21,10 @@ async function runSync() {
     return { fetched: 0, inserted: 0 };
   }
 
-  const rows = items.map(mapItemToRow);
+  const primaryArtistIds = items.map((item) => item.track.artists[0] && item.track.artists[0].id);
+  const artistGenresById = await fetchArtistGenres(primaryArtistIds);
+
+  const rows = items.map((item) => mapItemToRow(item, artistGenresById));
   rows.forEach((row) => {
     console.log(`  - ${row.playedAt}  ${row.artistName} - ${row.trackName}`);
   });
